@@ -3,7 +3,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    if params[:tag].present?
+      @posts = Post.tagged_with(params[:tag]).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    else
+      @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    end
   end
 
   # GET /posts/1 or /posts/1.json

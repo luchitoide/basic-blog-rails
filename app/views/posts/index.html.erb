@@ -1,5 +1,12 @@
 <div class="container mt-5">
-  <h1 class="mb-4 color text-light">Articulos</h1>
+  <div class="d-flex justify-content-between">
+    <h1 class="mb-4 color text-light">Articulos</h1>
+
+    <%= form_with(url: root_path, method: :get, class: 'custom-form') do |form| %>
+      <%= form.collection_select :tag, ActsAsTaggableOn::Tag.all, :name, :name, { prompt: 'Filtrar por etiqueta' }, class: 'custom-select' %>
+      <%= form.submit 'Filtrar', class: 'btn custom-button' %>
+    <% end %>
+  </div>
 
   <% @posts.each do |post| %>
     <div class="post-container">
@@ -16,8 +23,9 @@
   <br>
 
   <%= link_to 'New post', new_post_path, class: 'btn btn-success' %>
-  <div class="pagination mt-4">
-  <%= will_paginate @posts, previous_label: 'Anterior', next_label: 'Siguiente', previous_disabled_class: 'disabled', next_disabled_class: @posts.next_page ? nil : 'disabled' %>  
+
+
+  <div class="mt-4">
+  <%= will_paginate @products, previous_label: 'Anterior', next_label: 'Siguiente', class: 'apple_pagination' %>
   </div>
-  
 </div>
