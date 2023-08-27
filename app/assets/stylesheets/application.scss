@@ -60,3 +60,8 @@
     border-radius: 5px;
     font-size: 14px;
   }
+
+  .disabled {
+    display: none;
+    pointer-events: none;
+}
