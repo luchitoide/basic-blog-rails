@@ -19,11 +19,24 @@
   </div>
 
   <div class="container mt-5">
-  <h3 class="color text-light">Comentarios:</h4> 
-    <% @post.comments.each do |comment| %>
+    <h3 class="color text-light">Comentarios:</h3>
+    <% @post.comments.where(parent_id: nil).each do |comment| %>
       <div class="comment_container">
         <strong><%= comment.name %>:</strong>
         <p><%= comment.content %></p>
+
+        <!-- Agregar botón para mostrar el formulario de respuesta -->
+        <%= link_to 'Responder', new_comment_path(post_id: @post.id, parent_id: comment.id), class: 'btn btn-secondary' %>
+
+        <!-- Mostrar respuestas a este comentario -->
+        <div class="replies">
+          <% comment.replies.each do |reply| %>
+            <div class="comment_container reply">
+              <strong><%= reply.name %>:</strong>
+              <p><%= reply.content %></p>
+            </div>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

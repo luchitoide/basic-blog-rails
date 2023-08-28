@@ -1,13 +1,17 @@
-<h2 class="mb-4 color text-light">Comentar en <%= @post.title %></h2>
-<%= form_with(model: @comment, url: comments_path) do |form| %>
-  <%= form.hidden_field :post_id, value: @post.id %>
-  <div class="form-group color text-light">
-    <%= form.label :name, 'Nombre' %>
-    <%= form.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group color text-light">
-    <%= form.label :content, 'Comentario' %>
-    <%= form.text_area :content, class: 'form-control' %>
-  </div>
-  <%= form.submit 'Agregar Comentario', class: 'btn btn-primary' %>
-<% end %>
+<div class="container mt-5">
+    <h2 class="mb-4 color text-light">Comentar en <%= @post.title %></h2>
+    <%= form_with(model: @comment, url: comments_path, method: :post) do |form| %>
+        <%= form.hidden_field :post_id, value: @post.id %>
+        <%= form.hidden_field :parent_id, value: @parent_id %> <!-- Agregar campo oculto para parent_id -->
+        
+    <div class="form-group color text-light">
+        <%= form.label :name, 'Nombre' %>
+        <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group color text-light">
+        <%= form.label :content, 'Comentario' %>
+        <%= form.text_area :content, class: 'form-control' %>
+    </div>
+    <%= form.submit 'Agregar Comentario', class: 'btn btn-primary' %>
+    <% end %>
+</div>
