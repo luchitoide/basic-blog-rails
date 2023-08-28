@@ -1,17 +1,31 @@
-<p style="color: green"><%= notice %></p>
 <div class="container mt-5">
-  <%= render @post %>
+  <div class="post-content-container">
+    <%= render @post %>
+  </div>
 
-  <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start justify-content-center">
     <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary me-md-2 mb-2 mb-md-0' %>
+    <%= link_to 'Comentar', new_comment_path(post_id: @post.id), class: 'btn btn-warning color text-light' %>
     <%= link_to "Back to posts", posts_path, class: 'btn btn-secondary' %>
 
     <%= button_to "Destroy this post", @post, method: :delete ,class: 'btn btn-danger ' %>
+    
   </div>
   <div class="tags">
     <h4 class="color text-light">Tags:</h4>
     <% @post.tag_list.each do |tag| %>
       <span class="badge badge-primary tag"><%= tag %></span>
     <% end %>
-    </div>
+  </div>
+
+  <div class="container mt-5">
+  <h3 class="color text-light">Comentarios:</h4> 
+    <% @post.comments.each do |comment| %>
+      <div class="comment_container">
+        <strong><%= comment.name %>:</strong>
+        <p><%= comment.content %></p>
+      </div>
+    <% end %>
+  </div>
+
 </div>
